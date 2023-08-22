@@ -9,14 +9,8 @@ namespace Boat
 
         public bool IsPressed => _isPressed;
         
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            _isPressed = true;
-        }
+        public void OnPointerDown(PointerEventData eventData) => _isPressed = true;
 
-        public void OnPointerUp(PointerEventData eventData)
-        {
-            _isPressed = false;
-        }
+        public void OnPointerUp(PointerEventData eventData) => _isPressed = false;
     }
 }

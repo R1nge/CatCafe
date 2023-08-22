@@ -1,18 +1,14 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace Boat
 {
-    public class BoatMovementView : MonoBehaviour
+    public class PlayerMovementView : MonoBehaviour
     {
+        [SerializeField] private float speed;
         [SerializeField] private InputButton leftButton, rightButton;
-        private BoatMovement _boatMovement;
+        private PlayerMovement _playerMovement;
 
-        private void Awake()
-        {
-            _boatMovement = new BoatMovement(transform);
-        }
+        private void Awake() => _playerMovement = new PlayerMovement(transform, speed);
 
         private void Update()
         {
@@ -28,12 +24,12 @@ namespace Boat
 
         private void MoveLeft()
         {
-            _boatMovement.Move(Vector2.left);
+            _playerMovement.Move(Vector2.left);
         }
 
         private void MoveRight()
         {
-            _boatMovement.Move(Vector2.right);
+            _playerMovement.Move(Vector2.right);
         }
     }
 }
