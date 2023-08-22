@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Boat
+namespace Player
 {
     public class PlayerMovement
     {

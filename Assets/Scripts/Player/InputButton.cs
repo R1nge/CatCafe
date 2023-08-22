@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Boat
+namespace Player
 {
     public class InputButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
