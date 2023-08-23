@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -8,6 +9,7 @@ namespace Player
     {
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private Transform spawnPoint;
+        [SerializeField] private CinemachineVirtualCamera camera;
         private IObjectResolver _objectResolver;
 
         [Inject]
@@ -18,7 +20,8 @@ namespace Player
 
         private void Start()
         {
-            _objectResolver.Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
+            var player = _objectResolver.Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
+            camera.Follow = player.transform;
         }
     }
 }
