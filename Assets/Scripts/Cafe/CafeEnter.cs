@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Interactable;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Cafe
 {
-    public class CafeEnter : MonoBehaviour
+    public class CafeEnter : MonoBehaviour, IInteractable
     {
-        private void OnTriggerEnter2D(Collider2D other) => SceneManager.LoadSceneAsync("GameCafe", LoadSceneMode.Single);
+        public void Interact() => SceneManager.LoadSceneAsync("GameCafe", LoadSceneMode.Single);
     }
 }
