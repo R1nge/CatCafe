@@ -6,6 +6,7 @@ namespace Cafe.Clients
 {
     public class ClientSpawner : MonoBehaviour
     {
+        [SerializeField] private Transform spawnPoint;
         [SerializeField] private ClientMovement client;
         private IObjectResolver _objectResolver;
 
@@ -19,7 +20,7 @@ namespace Cafe.Clients
         {
             for (int i = 0; i < 5; i++)
             {
-                _objectResolver.Instantiate(client, Vector3.zero, Quaternion.identity);
+                _objectResolver.Instantiate(client, spawnPoint.position, Quaternion.identity);
             }
         }
     }
