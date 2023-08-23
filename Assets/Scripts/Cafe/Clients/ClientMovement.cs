@@ -6,6 +6,7 @@ namespace Cafe.Clients
 {
     public class ClientMovement : MonoBehaviour
     {
+        [SerializeField] private float speed;
         private OrderManager _orderManager;
         private ClientQueue _clientQueue;
         private int _positionIndex;
@@ -21,7 +22,15 @@ namespace Cafe.Clients
         {
             _orderManager.OnOrderCompleted += MoveToNextPositionInQueue;
             _positionIndex = _clientQueue.TakePlace();
-            transform.position = _clientQueue.GetPosition(_positionIndex);
+        }
+
+        private void Update()
+        {
+            transform.position =
+                Vector2.MoveTowards(
+                    transform.position,
+                    _clientQueue.GetPosition(_positionIndex),
+                    speed * Time.deltaTime);
         }
 
         private void MoveToNextPositionInQueue()
@@ -37,7 +46,6 @@ namespace Cafe.Clients
 
             _positionIndex--;
             print(_clientQueue.GetPosition(_positionIndex));
-            transform.position = _clientQueue.GetPosition(_positionIndex);
         }
 
         private void OnDestroy()
