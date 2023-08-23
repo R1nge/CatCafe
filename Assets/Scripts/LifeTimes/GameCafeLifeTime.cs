@@ -1,4 +1,5 @@
-﻿using VContainer;
+﻿using Cafe;
+using VContainer;
 using VContainer.Unity;
 
 namespace LifeTimes
@@ -7,6 +8,7 @@ namespace LifeTimes
     {
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<OrderManager>(Lifetime.Scoped).AsSelf();
         }
     }
 }

@@ -10,10 +10,7 @@ namespace Player
         [SerializeField] private float rayDistance;
         [SerializeField] private LayerMask ignoreLayer;
 
-        private void Awake()
-        {
-            interact.onClick.AddListener(Interact);
-        }
+        private void Awake() => interact.onClick.AddListener(Interact);
 
         private void Interact()
         {
@@ -34,9 +31,6 @@ namespace Player
             }
         }
 
-        private void OnDestroy()
-        {
-            interact.onClick.RemoveAllListeners();
-        }
+        private void OnDestroy() => interact.onClick.RemoveAllListeners();
     }
 }
