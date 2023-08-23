@@ -5,19 +5,25 @@ namespace Cafe
     public class OrderManager
     {
         public event Action OnOrderCompleted;
-        private Order _currentOrder;
+        public event Action OnOrderSpoiled;
+        private Order _order;
 
-        public bool HasOrder() => _currentOrder;
+        public Order Order => _order;
 
-        public void SetOrder(Order order)
-        {
-            _currentOrder = order;
-        }
+        public bool HasOrder() => _order != null;
+
+        public void SetOrder(OrderSo orderSo) => _order = new Order(orderSo.DishName);
 
         public void CompleteOrder()
         {
-            _currentOrder = null;
+            _order = null;
             OnOrderCompleted?.Invoke();
+        }
+
+        public void SpoilOrder()
+        {
+            _order = null;
+            OnOrderSpoiled?.Invoke();
         }
     }
 }

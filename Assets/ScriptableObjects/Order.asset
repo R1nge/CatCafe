@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9a173214e2455c84e829879987515b, type: 3}
   m_Name: Order
   m_EditorClassIdentifier: 
-  dishName: Sushi
+  dishName: 

@@ -6,7 +6,7 @@ namespace Cafe
 {
     public class OrderTable : MonoBehaviour, IInteractable
     {
-        [SerializeField] private Order[] possibleOrders;
+        [SerializeField] private OrderSo[] possibleOrders;
         private OrderManager _orderManager;
 
         [Inject]
