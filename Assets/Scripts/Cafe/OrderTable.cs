@@ -20,7 +20,6 @@ namespace Cafe
             if (_orderManager.HasOrder())
             {
                 Debug.LogError("Already has an order");
-                _orderManager.CompleteOrder();
                 return;
             }
 
