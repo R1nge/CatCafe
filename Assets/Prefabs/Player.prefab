@@ -691,6 +691,9 @@ MonoBehaviour:
   speed: 5
   leftButton: {fileID: 988361209527345247}
   rightButton: {fileID: 6374602141788467677}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &-4187658254106029591
 MonoBehaviour:
   m_ObjectHideFlags: 0

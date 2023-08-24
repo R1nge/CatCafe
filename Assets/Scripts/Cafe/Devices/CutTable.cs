@@ -4,7 +4,7 @@ using VContainer;
 
 namespace Cafe.Devices
 {
-    public class FishDevice : MonoBehaviour, IInteractable
+    public class CutTable : MonoBehaviour, IInteractable
     {
         private OrderManager _orderManager;
 
@@ -28,6 +28,8 @@ namespace Cafe.Devices
                 return;
             }
 
+            //TODO: create a cut mini game,
+            //Player can cut the fish however he'd like
             _orderManager.Order.CutFish();
             Debug.Log("Cut the fish");
         }
