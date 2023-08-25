@@ -7,6 +7,7 @@ namespace Music
     {
         [SerializeField] private AudioSource audioSource;
         private MusicPlayer _musicPlayer;
+        private bool _songEnded;
 
         [Inject]
         private void Construct(MusicPlayer musicPlayer)
@@ -34,6 +35,18 @@ namespace Music
             if (Input.GetKeyDown(KeyCode.D))
             {
                 StartCoroutine(_musicPlayer.PlayNextSong(audioSource));
+            }
+
+            if (_musicPlayer.SongEnded(audioSource))
+            {
+                _songEnded = true;
+
+                if (_songEnded)
+                {
+                    StartCoroutine(_musicPlayer.PlayNextSong(audioSource));
+                }
+
+                _songEnded = false;
             }
         }
     }

@@ -10,12 +10,17 @@ namespace Music
     public class MusicPlayer
     {
         public event Action OnSongsLoaded;
-        private readonly string _audioPath = $"{Application.streamingAssetsPath}/Music/";
+        private readonly string _audioPath = $"{Application.persistentDataPath}/Music/";
         private readonly List<string> _songs = new();
         private int _lastSongIndex;
 
         public void LoadSongs()
         {
+            if (!Directory.Exists(_audioPath))
+            {
+                Directory.CreateDirectory(_audioPath);
+            }
+
             var files = Directory.EnumerateFiles(_audioPath, "*.mp3", SearchOption.AllDirectories);
             var length = 0;
 
@@ -27,6 +32,7 @@ namespace Music
             }
 
             Debug.Log($"LOADED SONGS {length}");
+
             OnSongsLoaded?.Invoke();
         }
 
@@ -52,6 +58,7 @@ namespace Music
         {
             using (var uwr = UnityWebRequestMultimedia.GetAudioClip(GetFirstSong(), AudioType.MPEG))
             {
+                ((DownloadHandlerAudioClip)uwr.downloadHandler).streamAudio = true;
                 yield return uwr.SendWebRequest();
                 if (uwr.result != UnityWebRequest.Result.Success)
                 {
@@ -65,10 +72,13 @@ namespace Music
             }
         }
 
+        public bool SongEnded(AudioSource audioSource) => audioSource.isPlaying == false;
+
         public IEnumerator PlayNextSong(AudioSource audioSource)
         {
             using (var uwr = UnityWebRequestMultimedia.GetAudioClip(GetNextSong(), AudioType.MPEG))
             {
+                ((DownloadHandlerAudioClip)uwr.downloadHandler).streamAudio = true;
                 yield return uwr.SendWebRequest();
                 if (uwr.result != UnityWebRequest.Result.Success)
                 {
@@ -86,6 +96,7 @@ namespace Music
         {
             using (var uwr = UnityWebRequestMultimedia.GetAudioClip(GetPreviousSong(), AudioType.MPEG))
             {
+                ((DownloadHandlerAudioClip)uwr.downloadHandler).streamAudio = true;
                 yield return uwr.SendWebRequest();
                 if (uwr.result != UnityWebRequest.Result.Success)
                 {
