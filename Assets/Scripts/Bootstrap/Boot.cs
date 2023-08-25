@@ -1,10 +1,24 @@
-﻿using UnityEngine;
+﻿using Music;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
 
 namespace Bootstrap
 {
     public class Boot : MonoBehaviour
     {
-        private void Start() => SceneManager.LoadSceneAsync("Game", LoadSceneMode.Single);
+        private MusicPlayer _musicPlayer;
+
+        [Inject]
+        private void Construct(MusicPlayer musicPlayer)
+        {
+            _musicPlayer = musicPlayer;
+        }
+
+        private void Start()
+        {
+            _musicPlayer.LoadSongs();
+            SceneManager.LoadSceneAsync("Game", LoadSceneMode.Single);
+        }
     }
 }
