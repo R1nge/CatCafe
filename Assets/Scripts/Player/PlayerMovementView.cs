@@ -1,45 +1,32 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Player
 {
     public class PlayerMovementView : MonoBehaviour
     {
         [SerializeField] private float speed;
-        [SerializeField] private InputButton leftButton, rightButton;
         [SerializeField] private LayerMask obstacleLayer;
         private PlayerMovement _playerMovement;
+        private float _positionX;
 
         private void Awake() => _playerMovement = new PlayerMovement(transform, speed);
 
+        private void Start() => _positionX = transform.position.x;
+
         private void Update()
         {
-            if (leftButton.IsPressed && CanMoveLeft())
+            if (Input.GetMouseButtonDown(0))
             {
-                MoveLeft();
+                _positionX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
             }
-            else if (rightButton.IsPressed && CanMoveRight())
-            {
-                MoveRight();
-            }
+
+            _playerMovement.MoveTo(_positionX);
         }
-
-        private bool CanMoveRight() => Raycast(Vector2.right);
-
-        private bool CanMoveLeft() => Raycast(Vector2.left);
 
         private bool Raycast(Vector2 direction)
         {
             return !Physics2D.Raycast(transform.position, direction, .4f, obstacleLayer);
-        }
-
-        private void MoveLeft()
-        {
-            _playerMovement.Move(Vector2.left);
-        }
-
-        private void MoveRight()
-        {
-            _playerMovement.Move(Vector2.right);
         }
     }
 }
